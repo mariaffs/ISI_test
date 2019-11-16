@@ -1,0 +1,98 @@
+
+MARIA FERNANDA FLORES SIMON
+
+PRÁCTICA TESTS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Fallo (mal en el código) y modificación para arreglar el código.
+
+2. Proporciona si es posible un caso de prueba que NO ejecute el código que tiene el fallo. Si no es posible explica por qué. Indica los datos usados en la prueba, el resultado esperado y el obtenido de cada caso.
+
+3. Si es posible proporciona un caso de prueba que ejecuta el fallo que hay en el código pero que no provoque un error en el estado. Si no se puede, explica por qué.
+
+4. Si es posible, proporciona caso de prueba que provoque error en el estado pero que no provoque disfunción en el programa. Si no es posible explica por qué.
+
+5. Describe el primero de los estados erróneos del anterior. Describe TODO el estado (variables, contador programa).
+
+6. Ejecuta en programas Java el código corregido y pruébalo con los casos de prueba creados.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+COUNT POSITIVE
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.El código cuenta el 0 como positivo, por tanto habría que modificarlo de la siguiente manera: en lugar de buscar que el elemento del array sea >= 0, ponemos que sea > 0, de esta forma nos quitamos el 0.
+
+2. Si el array no está vacío no se jecuta el código con el fallo. (también posríamos poner un array que no contenga 0 y no veríamos el fallo)
+
+Valores: arrays, uno con 0 al final, otro con 0 al principio, otro sin ceros, otro con números negativos y un array vacío para probar el nuevo caso.
+Resultados esperado: los resultados esperados en el primer array se cumplen, ya que espero 3 'positivos' (tiene en cuenta el 0). Si no queremos que lo tenga en cuenta habría qeu hacer la modificación.
+Resultados en el segundo array NO se cumplen, porque este es el que quiero que me de fallo, de tal manera que espero 1 positivo y tengo 3 (contando el 0).
+Resultado en el tercer array, NO meto ceros dentro de este, por tanto al ejecutar no me da error y espero como resultado 3 positivos y eso es lo que obtengo.
+Resultado cuarto array, en el que tengo números negativos, espero como resultado 1 positivo, ya que los otros números de mi array son negativos, y como resultado obtengo un 1.
+
+En el caso de tener array vacío, esperaré que me devuelva 0 positivos.
+
+3. Si hago el cambio en el if y pongo que > 0, no me dará error en el estado si en el test espero un número de positivos sin contar el 0. 
+Si no hago el cambio en el if y dejo >= 0, me dará error en el estado si en el test espero un número de positivos sin contar el 0, porque el código sigue teniendo en cuenta el 0. 
+
+4. NO se puede. Por ejemplo, en el código no cambio nada, y por tanto me cuenta el 0. Al hacer el test si pongo ceros en mi array, me los tendrá en cuenta y me los contará como positivos. 
+
+
+LAST ZERO
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Fallo en el caso de que en el array haya más de un 0, por ejemplo en mi caso, en el nuevo array hay un 0 en la posición 0 y otro en la posicion 1 y en la tercera posición no hay un cero, por tanto no lo tiene en cuenta. Me devuelve el primer cero que encuentra y no debería ser así, me tendría que devolver el segundo y último cero que encuentra.
+La modificación que propongo es en el código del programa, cambiar el bucle en el if, y en lugar de que me devuelva directamente el primer cero que encuentre, lo que hago es recorrer el array e ir metiendo el último cero que encuentre en una variable que me defino como 'y'. Esta variable se va actualizando a medida que encuentre en el array un nuevo 0. Cuando finaliza el array, me devuelve la variable 'y' con el último 0 encontrado.
+
+2. Si el array está vacío no se ejecuta el fallo.
+
+En caso de no querer que nos afecte el fallo habría que poner en el Test un array con sólo un 0, independientemente de la posición de este. Ahora bien, el problema aparece cuando hay más de un 0 en el array.
+
+En el primer array tenemos {2, 7, 0}, el resultado esperado es 0 en la posición 2, y así es, ese es el resultado obtenido.
+En el siguiente array tenemos {0, 7, 2} , este es el caso en el qeu queremos ver que da fallo, el resultado esperado es 0 en la posición 1, y el resultado obtenido es 0 en la posición 0.
+En el siguiente array 'few' probamos array con más de  un 0, {0, 0, 2}, el resultado esperado es 0 en la posición 1:
+En el caso de usar el código original, el resultado obtenido es 0 en la posición 0. (MAL!)
+En el caso de usar el código propuesto, el resultado obtenido es 0 en la posición 1. (BIEN!)
+En el siguiente array 'middle' probamos array con {3, 0, 2}, en el que el resultado esperado es 0 en la posición 1, y ese es el resultado obtenido.
+
+3. Repito que el fallo nos va a dar en todo caso cuando haya en el array más de un cero, ya que en lugar de devolvernos el último 0 nos va a devolver el primero que encuentre ignorando si hay otro 0 detrás. Por tanto, no hay error si en el array únicamente hay un cero.
+
+4. Error no me dará si el array no tiene ceros o solo hay uno.
+
+FIND LAST
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. El fallo que me da es en caso de que el array no tenga números repetidos y el número que se busca se encuentra en la posición 0, no llega a verlo. Nunca se llega a la posición 0 del array, es decir, al primer elemento de este. 
+
+Modificación: en el código, en lugar de hacer el bucle con i > 0, lo cambio por i >= 0, de esta forma me lee también el de la posición 0 del array.
+
+2. Si el array está vacío no ejecuta el fallo. 
+
+También podríamos definir arrays sin el valor buscado en la posición 0.  
+
+En el caso del primer array tenemos {2, 7, 0} e y = 7. El resultado esperado es tener 'y', osea 7 en la posición 1 y así es, ese es el resultado obtenido.
+En el caso del segundo array tenemos {0, 7, 2} e y = 2. Este es el caso que queremos que nos de fallo para ver que así es. El resultado esperado es el valor de 'y' osea 2 en la posición 1, y el resultado obtenido es el 2 en la posición 2. 
+En el array 'twoequals', tenemos el array {7, 7, 0} e y = 7. Como el array se recorre desde el final hasta el principio, el primer 7 que encuentra es el de la posición 1. El valor esperado es 7 en la posición 1. 
+En el array 'firstPosition' tenemos {2, 7, 0} e y = 2. El resultado esperado es 2 en la posición 0 y no se obtiene nada, me da fallo, ya que el código no llega al elemento que se encuentra en la posición 0 del array. (esto con el código original qeu tiene el fallo). Con el código propuesto esto no pasaría, ya que sí que vería el 2 en la posición 0.
+
+3. Los casos de prueba en los que se ejcuta el código que da fallo pero que no provoca error en el estado, son aquellos en los que el array no tiene el número que se busca en la posición 0 del array.
+
+4. Para que se produzca error tendría que usar el código original y en el Test probar un array con el número buscado en la posición 0 del array. En este caso sí que habría disfunción.
+
+ODD OR POS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Los números impares negativos no los tiene en cuenta como impares. 
+Modificación:añadir nueva condición para tenerlos en cuenta. En el if (x[i]%2 == 1) podríamos añadir la condición de (x[i]%2 == -1).
+
+2. SI array vacío no se ejecuta.
+
+En el primer array que tenemos {2, 7, 0} la respuesta esperada es 2, ya que tenemos el 2 que es mayor que 0 y el 7 que es impar y esa es la respuesta obtenida.
+En el segundo array tenemos {0, 7, 2}. Este es el caso qeu queremos que de fallo. La respuesta esperada es 1 y la obtenida es 2 por la misma razón que el anterior array. 
+EL último array {0, -7, -2}, la respuesta esperada es 0 y así es. Mal! debería devolver 1, debería tener en cuenta el -7 que es un número impar negativo.
+
+3. Un caso que ejecute el código de prueba pero que no de fallo en el estado sería no poner números negativos en él.
+
+4. NO se puede porque no tiene en cuenta los números impares negativos con ese código.
+
+
